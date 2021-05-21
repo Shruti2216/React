@@ -3,11 +3,27 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {createStore, applyMiddleware} from 'redux';
+import rootReducer from './store/reducers';
+import {Provider} from 'react-redux';
+import thunk from 'redux-thunk';  //This middleware import from reduc thunk to connection with API
+//import configureStore, {store, persistor} from './store/configureStore';
+//import {PersistGate} from 'react-persist/integrtion/react';
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk) //this is middleware
+  ); 
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+   <Provider store={store}>
+     
+       <App />
+       
+   </Provider>,
+
+  
   document.getElementById('root')
 );
 
